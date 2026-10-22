@@ -10,6 +10,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -28,6 +29,10 @@ func run(me string, args []string, stdout, stderr io.Writer) int {
 
 The memories live in $XDG_DATA_HOME/optmem (~/.local/share/optmem), or in $MEMORY_DIR if set. See github.com/samuelstevens/optmem.`,
 		SilenceErrors: true,
+	}
+	// The version Go stamps into the binary: a tag or a pseudo-version naming the exact commit.
+	if info, ok := debug.ReadBuildInfo(); ok {
+		root.Version = info.Main.Version
 	}
 	add := func(use, short string, args cobra.PositionalArgs, body func(*memo, []string) error) *cobra.Command {
 		c := &cobra.Command{Use: use, Short: short, Args: args, RunE: func(c *cobra.Command, args []string) error {

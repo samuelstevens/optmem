@@ -1,7 +1,7 @@
 # optmem
 
 - I am the *only* user of this project. We never have to worry about changing command names, flags, or printed text. The one compatibility contract is the on-disk format (fixed-width `LOG.txt` and `TREE/<size>` records, `config`), shared with the Python tool at github.com/VictorTaelin/OptMem: either must open the other's memory.
-- One package, cobra the only dependency. Files split by layer: `main.go` (CLI wiring, error reporting, where the memory lives), `tree.go` (the summary tree as pure math, no I/O), `store.go` (the on-disk format: records, lock, crash repair; everything that knows the bytes), `config.go` (sizes and `memo config`), `commands.go` (the other commands and the nap prompt).
+- One package, `cmd/memo` (so `go install .../cmd/memo` names the binary `memo`), cobra the only dependency. Files split by layer: `main.go` (CLI wiring, error reporting, where the memory lives), `tree.go` (the summary tree as pure math, no I/O), `store.go` (the on-disk format: records, lock, crash repair; everything that knows the bytes), `config.go` (sizes and `memo config`), `commands.go` (the other commands and the nap prompt).
 - Agents act on the printed text, so a reworded prompt is a behavior change. List divergences from upstream in the README.
 
 # Style

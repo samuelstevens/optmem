@@ -5,11 +5,11 @@ A Go port of [OptMem](https://github.com/VictorTaelin/OptMem): permanent, append
 ## Install
 
 ```sh
-just install           # builds ~/.local/bin/memo
+GOBIN=~/.local/bin go install github.com/samuelstevens/optmem/cmd/memo@latest
 memo init              # creates ~/.local/share/optmem, prints the block for AGENTS.md
 ```
 
-Paste the printed `## Memory` block into your agent's instructions file.
+Paste the printed `## Memory` block into your agent's instructions file. To update, run the same `go install` again; `memo --version` names the commit installed.
 
 ## Differences from upstream
 
@@ -21,6 +21,7 @@ Paste the printed `## Memory` block into your agent's instructions file.
 ## Development
 
 ```sh
+just install           # install this checkout to ~/.local/bin/memo
 just test-unit         # fmt, lint, tests
 just test-fuzz         # fuzz the cover and the recall merge
 ```
